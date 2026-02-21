@@ -35,4 +35,7 @@ GRAPH = build_graph()
 def run_pipeline(filename: str, raw_text: str) -> AgentState:
     state = AgentState(filename=filename, raw_text=raw_text)
     out = GRAPH.invoke(state)
+    # Convert dict output back to AgentState
+    if isinstance(out, dict):
+        return AgentState(**out)
     return out
